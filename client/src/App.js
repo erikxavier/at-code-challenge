@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import Navbar from './components/navbar'
 import MovieList from './components/movie-list'
 import MovieDetail from './components/movie-detail'
+import SearchResults from './components/search-results'
 import bg from './assets/castle1.png'
 
 const Header = styled.div`
@@ -16,19 +17,20 @@ const Header = styled.div`
 `
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div className='App'>
         <Router>
           <Navbar />
-          <div className="container background-xs-none">
-            <Header className="jumbotron my-2">
+          <div className='container background-xs-none'>
+            <Header className='jumbotron my-2'>
               <h1 className='text-center'>Awesome Upcoming Movies</h1>
               <h5 className='text-center'>BROUGHT TO YOU BY CASTLE MEDIA GROUP</h5>
             </Header>
             <Switch>
               <Route exact path='/' component={MovieList} />
-              <Route path='/movie/:movieId' component={MovieDetail}></Route>
+              <Route path='/movie/:movieId' component={MovieDetail} />
+              <Route path='/search/:queryString' component={SearchResults} />
             </Switch>
           </div>
         </Router>
