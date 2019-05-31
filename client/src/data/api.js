@@ -1,10 +1,9 @@
 import axios from 'axios'
 
-const fetchMovieList = (page = 1) => {
+const fetchMovieList = (page) => {
   return new Promise((resolve, reject) => {
     let url = '/api/upcoming'
     if (page) url = url + `/${page}`
-    console.log(url)
     axios.get(url)
       .then(response => resolve(response.data))
       .catch((error) => {
@@ -14,8 +13,16 @@ const fetchMovieList = (page = 1) => {
   })
 }
 
-const fetchMovieDetail = () => {
-  return Promise.resolve(MOVIE)
+const fetchMovieDetail = (movieId) => {
+  return new Promise((resolve, reject) => {
+    let url = `/api/movie/${movieId}`
+    axios.get(url)
+      .then(response => resolve(response.data))
+      .catch((error) => {
+        if (error.respose) reject(error.response.data)
+        else reject(error.message)
+      })
+  })
 }
 
 export {fetchMovieDetail, fetchMovieList}
