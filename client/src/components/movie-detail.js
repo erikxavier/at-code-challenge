@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { fetchMovieDetail } from '../data/api'
 import StatusHandler from './status-handler'
 
