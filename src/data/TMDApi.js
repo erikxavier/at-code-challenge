@@ -14,6 +14,7 @@ const apiCall = (url, method, params = {}) => {
       ...params
     }
   }
+  console.log(`Requested ${JSON.stringify(requestConf)}`)
   return new Promise((resolve, reject) => {
     axios(requestConf)
       .then(result => resolve(result.data))
@@ -34,7 +35,6 @@ const fetchApiConfigurations = async () => {
       return genresAsObj
     }, { })
   }
-  console.log( apiConfig )
 }
 
 const parseMovie = (rawMovie) => {
@@ -49,9 +49,8 @@ const parseMovie = (rawMovie) => {
   if (rawMovie.genres) {
     parsedMovie.genres = rawMovie.genres.map((genre) => genre.name)
   } else if (rawMovie.genre_ids) {
-   parsedMovie.genres = rawMovie.genre_ids.map((genreId => apiConfig.genres[genreId]))
+    parsedMovie.genres = rawMovie.genre_ids.map(genreId => apiConfig.genres[genreId])
   }
-  console.log(rawMovie, parsedMovie)
   return parsedMovie
 }
 
@@ -67,15 +66,13 @@ const searchMovie = async (query) => {
 }
 
 const getUpcoming = async (page) => {
-  let params = {}
-  if (typeof page === 'number') { params.page = page }
-  return apiCall('/movie/upcoming', 'get', params)
+  if (page) return apiCall('/movie/upcoming', 'get', {page})
+  else return apiCall('/movie/upcoming', 'get')
 }
 
 const getMovie = async (movieId) => {
   return apiCall(`/movie/${movieId}`, 'get')
 }
-
 
 module.exports = {
   getUpcoming, getMovie, searchMovie, fetchApiConfigurations, parseMovie
