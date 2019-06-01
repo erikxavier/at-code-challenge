@@ -39,7 +39,6 @@ export default class MovieDetail extends React.Component {
           <h6>Release: {new Date(movie.release).toDateString()}</h6>
           <i>Genre: {movie.genres.join(', ')}</i>
           <p className='mt-2 text-primary justify-content-center'>Overview: {movie.overview}</p>
-          {console.log(this.props)}
           <button onClick={this.props.history.goBack} class='btn btn-sm bottom btn-xs-block btn-outline-primary mt-2 align-self-bottom'>{`<< Go back`}</button>
         </div>
       </div>

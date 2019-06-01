@@ -20,7 +20,6 @@ class ScrollDetector extends Component {
     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
     const windowBottom = windowHeight + window.pageYOffset
     if (windowBottom * 1.1 >= docHeight) {
-      console.log('Bottom reached')
       if (this.props.active && this.props.onBottom) this.props.onBottom()
     }
   }
