@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import 'bootswatch/dist/lux/bootstrap.min.css'
+import './App.css'
+import '@fortawesome/fontawesome-free/css/all.css'
+import Navbar from './components/navbar'
+import MovieList from './components/movie-list'
+import MovieDetail from './components/movie-detail'
+import SearchResults from './components/search-results'
+import bg from './assets/castle1.png'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Header = styled.div`
+  background-image: url(${bg});
+  background-repeat: no-repeat;
+  background-size: contain;
+`
+
+class App extends Component {
+  render () {
+    return (
+      <div className='App'>
+        <Router>
+          <Navbar />
+          <div className='container background-xs-none'>
+            <Header className='jumbotron my-2'>
+              <h1 className='text-center'>Awesome Upcoming Movies</h1>
+              <h5 className='text-center'>BROUGHT TO YOU BY CASTLE MEDIA GROUP</h5>
+            </Header>
+            <Switch>
+              <Route exact path='/' component={MovieList} />
+              <Route path='/movie/:movieId' component={MovieDetail} />
+              <Route path='/search/:queryString' component={SearchResults} />
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
