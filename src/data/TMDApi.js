@@ -14,7 +14,6 @@ const apiCall = (url, method, params = {}) => {
       ...params
     }
   }
-  console.log(`Requested ${JSON.stringify(requestConf)}`)
   return new Promise((resolve, reject) => {
     axios(requestConf)
       .then(result => resolve(result.data))
@@ -61,8 +60,9 @@ const parseImageSizes = (imgPath, sizes) => {
   }, {})
 }
 
-const searchMovie = async (query) => {
-  return apiCall('search/movie', 'get', { query })
+const searchMovie = async (query, page) => {
+  if (page) return apiCall('search/movie', 'get', { query, page })
+  else return apiCall('search/movie', 'get', { query })
 }
 
 const getUpcoming = async (page) => {

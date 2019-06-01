@@ -3,7 +3,7 @@ const router = express.Router()
 const TMDApi = require('../data/TMDApi')
 
 router.use('/upcoming/:page?', async (req, res) => {
-  TMDApi.getUpcoming(req.params.page)
+  TMDApi.getUpcoming(req.params['page'])
     .then(movieList => {
       movieList.results = movieList.results.map(TMDApi.parseMovie)
       res.json(movieList)
@@ -20,8 +20,8 @@ router.use('/movie/:id', async (req, res) => {
     .catch(error => res.status(400).send(error))
 })
 
-router.use('/search/:query', async (req, res) => {
-  TMDApi.searchMovie(req.params['query'])
+router.use('/search/:query/:page?', async (req, res) => {
+  TMDApi.searchMovie(req.params['query'], req.params['page'])
     .then(searchResults => {
       searchResults.results = searchResults.results.map(TMDApi.parseMovie)
       res.json(searchResults)
