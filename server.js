@@ -1,5 +1,5 @@
 const express = require('express')
-const PORT = process.env.PORT | 4000
+const PORT = process.env.PORT || 4000
 const movieRoutes = require('./src/routes/movie-routes')
 const path = require('path')
 const { fetchApiConfigurations } = require('./src/data/TMDApi')
